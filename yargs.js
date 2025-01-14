@@ -1,18 +1,23 @@
-const yargs = require("yargs");
+#!/usr/bin/env node
 
-const argv = yargs.command('greet [name]', 'Greet a person', {
-  name: {
-    description: 'The name of the person to greet',
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
+
+const argv = yargs(hideBin(process.argv))
+  .option('name', {
     alias: 'n',
-    type: 'string'
-  }
-})
-.help()
-.alias('help', 'h')
-.argv;
+    type: 'string',
+    description: 'Your name',
+  })
+  .option('age', {
+    alias: 'a',
+    type: 'number',
+    description: 'Your age',
+  })
+  .help()
+  .alias('help', 'h').argv;
 
-if(argv.name) {
-  console.log(`Hello, ${argv.name}!`);
-} else {
-  console.log('Hello, world!');
+console.log(`Hi, ${argv.name || 'gust'}`);
+if (argv.age) {
+  console.log(`Your age is ${argv.age}`);
 }
