@@ -8,11 +8,15 @@ import decompress from './zip/decompress.js';
 import calcHash from './hash/calcHash.js';
 import create from './fs/create.js';
 import changeDirectory from './navigation/cd.js';
+import up from './navigation/up.js';
 
 export default async function executedCommands(command, args) {
-  console.log('command', command);
-  console.log('args', args);
+  // console.log('command', command);
+  // console.log('args', args);
   switch (command) {
+    case 'up':
+      up()
+      break;
     case 'cd':
       changeDirectory(args[0]);
       break;

@@ -16,8 +16,6 @@ export default function changeDirectory(directoryPath) {
     }
 
     process.chdir(resolvedPath);
-    const currentDirectory = process.cwd();
-    console.log(`Current directory is "${currentDirectory}"`);
   } catch (error) {
     console.error(`Error: ${error.message}`);
   }
