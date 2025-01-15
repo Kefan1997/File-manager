@@ -1,14 +1,13 @@
 import { rename } from 'node:fs/promises';
 
-import { getPath, doesPathExist, operationFail } from '../helpers/index.js';
+import { getPath, doesPathExist } from '../../helpers/index.js';
 
-const renameFn = async () => {
-  const oldPath = getPath(import.meta.url, 'files', 'wrongFilename.txt');
-  const newPath = getPath(import.meta.url, 'files', 'properFilename.md');
+const renameFn = async (pathToFile, newFileName) => {
+  const oldPath = getPath(import.meta.url,  'wrongFilename.txt');
+  const newPath = getPath(import.meta.url, 'properFilename.md');
 
   if (!(await doesPathExist(oldPath)) || (await doesPathExist(newPath))) {
-    operationFail();
-    return;
+    throw new Error('FS operation failed');
   }
 
   try {
@@ -18,4 +17,4 @@ const renameFn = async () => {
   }
 };
 
-await renameFn();
+export default renameFn;
