@@ -2,13 +2,12 @@
 
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import Conf from 'conf';
 import chalk from 'chalk';
 import readline from 'readline';
 
+import config from '../src/lib/config.js';
 import { printCurrentDir } from '../src/lib/currentDir.js';
-
-const config = new Conf({ projectName: 'File-manager' });
+import executedCommands from '../src/lib/cliCommands.js';
 
 const argv = yargs(hideBin(process.argv))
   .option('username', {
@@ -20,7 +19,11 @@ const argv = yargs(hideBin(process.argv))
   .help()
   .alias('help', 'h').argv;
 
-const username = argv.username || 'guest';
+if (argv.username) {
+  config.set('username', argv.username);
+}
+
+const username = config.get('username');
 console.log(chalk.green(`Welcome to the File Manager, ${username}`));
 
 printCurrentDir();
@@ -40,6 +43,12 @@ rl.on('line', async (line) => {
     console.log(chalk.green(`Thank you for using File Manager, ${username}, goodbye!`));
     rl.close();
     return;
+  }
+
+  try {
+    await executedCommands(command, args)
+  } catch (err) {
+    console.error(chalk.red(`Error: ${err.message}`))
   }
 
   printCurrentDir();
