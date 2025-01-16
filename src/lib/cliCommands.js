@@ -6,7 +6,7 @@ import renameFn from './fs/rename.js';
 import compress from './zip/compress.js';
 import decompress from './zip/decompress.js';
 import calcHash from './hash/calcHash.js';
-import createFile from './fs/create.js';
+import createFile from './fs/createFile.js';
 import changeDirectory from './navigation/cd.js';
 import up from './navigation/up.js';
 import listFilesAndFolders from './navigation/ls.js';
@@ -44,9 +44,8 @@ export default async function executedCommands(command, args) {
       await remove(args[0], args[1]);
       console.log(chalk.green('File deleted successfully.'));
       break;
-    case 'rename':
+    case 'rn':
       await renameFn(args[0], args[1]);
-      console.log(chalk.green('File renamed successfully.'));
       break;
     case 'compress':
       await compress(args[0], args[2]);
