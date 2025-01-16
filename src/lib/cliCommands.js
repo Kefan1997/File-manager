@@ -3,8 +3,6 @@ import chalk from 'chalk';
 import copy from './fs/copy.js';
 import remove from './fs/delete.js';
 import renameFn from './fs/rename.js';
-import compress from './zip/compress.js';
-import decompress from './zip/decompress.js';
 import calcHash from './hash/calcHash.js';
 import createFile from './fs/createFile.js';
 import changeDirectory from './navigation/cd.js';
@@ -32,11 +30,6 @@ export default async function executedCommands(command, args) {
     case 'cp':
       await copy(args[0], args[1]);
       break;
-    // need to implement this
-    case 'move':
-      await move(args[0], args[1]);
-      console.log(chalk.green('File moved successfully.'));
-      break;
     case 'delete':
       await remove(args[0], args[1]);
       console.log(chalk.green('File deleted successfully.'));
@@ -44,17 +37,8 @@ export default async function executedCommands(command, args) {
     case 'rn':
       await renameFn(args[0], args[1]);
       break;
-    case 'compress':
-      await compress(args[0], args[2]);
-      console.log(chalk.green('File has been compressed successfully.'));
-      break;
-    case 'decompress':
-      await decompress(args[0], args[1]);
-      console.log(chalk.green('File has been decompressed successfully.'));
-      break;
     case 'hash':
-      await calcHash(args[0], args[1]);
-      console.log(chalk.green('Hash has been calculated successfully.'));
+      await calcHash(args[0]);
       break;
     // need to implement this
     case 'system':

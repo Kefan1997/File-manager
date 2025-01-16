@@ -1,16 +1,15 @@
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { pipeline } from 'node:stream/promises';
+import path from 'node:path';
 
-import { getPath } from '../../helpers/index.js';
-
-const calcHash = async () => {
-  const pathToFile = getPath(import.meta.url, 'files', 'fileToCalculateHashFor.txt');
-
-  const hash = createHash('sha256').setEncoding('hex');
-  const readStream = createReadStream(pathToFile);
-
+export default async function calcHash(pathToFile) {
   try {
+    const resolvedPath = path.resolve(pathToFile);
+
+    const hash = createHash('sha256').setEncoding('hex');
+    const readStream = createReadStream(resolvedPath);
+
     await pipeline(readStream, hash);
 
     hash.end();
@@ -26,6 +25,4 @@ const calcHash = async () => {
       console.error('An error occurred:', err.message);
     }
   }
-};
-
-export default calcHash;
+}
