@@ -9,20 +9,24 @@ import calcHash from './hash/calcHash.js';
 import create from './fs/create.js';
 import changeDirectory from './navigation/cd.js';
 import up from './navigation/up.js';
-import listFilesAndFolders from './navigation/ls.js'
+import listFilesAndFolders from './navigation/ls.js';
+import readFile from './fs/read.js';
 
 export default async function executedCommands(command, args) {
   // console.log('command', command);
   // console.log('args', args);
   switch (command) {
     case 'up':
-      up()
+      up();
       break;
     case 'cd':
       changeDirectory(args[0]);
       break;
     case 'ls':
       await listFilesAndFolders();
+      break;
+    case 'cat':
+      readFile(args[0]);
       break;
     case 'add':
       await create(args[0]);
