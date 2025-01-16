@@ -13,8 +13,6 @@ import listFilesAndFolders from './navigation/ls.js';
 import readFile from './fs/read.js';
 
 export default async function executedCommands(command, args) {
-  // console.log('command', command);
-  // console.log('args', args);
   switch (command) {
     case 'up':
       up();
@@ -31,9 +29,8 @@ export default async function executedCommands(command, args) {
     case 'add':
       await createFile(args[0]);
       break;
-    case 'copy':
+    case 'cp':
       await copy(args[0], args[1]);
-      console.log(chalk.green('File copied successfully.'));
       break;
     // need to implement this
     case 'move':

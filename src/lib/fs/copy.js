@@ -1,22 +1,40 @@
-import { cp } from 'node:fs/promises';
+import path from 'node:path';
+import fs from 'node:fs';
+import chalk from 'chalk';
 
-import { getPath, doesPathExist } from '../../helpers/index.js';
-
-const copy = async (pathToFile, pathToNewDirectory) => {
-  const pathToCopyDir = getPath(import.meta.url, pathToFile);
-  const pathToDestinationDir = getPath(import.meta.url, pathToNewDirectory);
-
-  if (!(await doesPathExist(pathToCopyDir)) || (await doesPathExist(pathToDestinationDir))) {
-    throw new Error('FS operation failed');
-    return;
-  }
-
+export default async function copy(pathToFile, pathToNewDirectory) {
   try {
-    await cp(pathToCopyDir, pathToDestinationDir, { recursive: true });
-    console.log('Files copied successfully');
+    const resolvedPathToFile = path.resolve(pathToFile);
+    const resolvedPathToNewDir = path.resolve(pathToNewDirectory);
+
+    if (!fs.existsSync(resolvedPathToFile)) {
+      throw new Error('The source file does not exist.');
+    }
+
+    if (!fs.existsSync(resolvedPathToNewDir)) {
+      fs.mkdirSync(resolvedPathToNewDir, { recursive: true });
+    }
+
+    const fileName = path.basename(resolvedPathToFile);
+    const newFilePath = path.join(resolvedPathToNewDir, fileName);
+
+    const readable = fs.createReadStream(resolvedPathToFile);
+    const writable = fs.createWriteStream(newFilePath);
+
+    readable.pipe(writable);
+
+    writable.on('finish', () => {
+      console.log(chalk.green(`File successfully copied to: ${newFilePath}`));
+    });
+
+    readable.on('error', (err) => {
+      console.error(chalk.red('Error reading file:'), err.message);
+    });
+
+    writable.on('error', (err) => {
+      console.error(chalk.red('Error writing file:'), err.message);
+    });
   } catch (err) {
     throw err;
   }
-};
-
-export default copy;
+}
