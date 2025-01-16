@@ -2,7 +2,7 @@ import { writeFile } from 'node:fs/promises';
 
 import { getPath } from '../../helpers/index.js';
 
-const create = async (fileName) => {
+export default async function createFile(fileName) {
   try {
     const path = getPath(process.cwd(), fileName);
 
@@ -13,6 +13,4 @@ const create = async (fileName) => {
     }
     throw err;
   }
-};
-
-export default create;
+}

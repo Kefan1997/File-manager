@@ -6,7 +6,7 @@ import renameFn from './fs/rename.js';
 import compress from './zip/compress.js';
 import decompress from './zip/decompress.js';
 import calcHash from './hash/calcHash.js';
-import create from './fs/create.js';
+import createFile from './fs/create.js';
 import changeDirectory from './navigation/cd.js';
 import up from './navigation/up.js';
 import listFilesAndFolders from './navigation/ls.js';
@@ -29,7 +29,7 @@ export default async function executedCommands(command, args) {
       readFile(args[0]);
       break;
     case 'add':
-      await create(args[0]);
+      await createFile(args[0]);
       break;
     case 'copy':
       await copy(args[0], args[1]);
