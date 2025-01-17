@@ -28,7 +28,7 @@ export default function getOSInformation(arg) {
 
 function getEOL() {
   const eol = os.EOL;
-  console.log(`End-Of-Line (EOL) character: "${eol === '\n' ? '\\n' : '\\r\\n'}"`);
+  console.log(chalk.green('End-Of-Line (EOL) character:'), eol === '\n' ? '\\n' : '\\r\\n');
 }
 
 function getCPUInfo() {
@@ -47,7 +47,7 @@ function getCPUInfo() {
 
 function getHomeDir() {
   const homeDir = os.homedir();
-  console.log(homeDir);
+  console.log(chalk.green('Home directory:'), homeDir);
 }
 
 function getUserName() {
