@@ -33,7 +33,6 @@ export default async function executedCommands(command, args) {
       break;
     case 'delete':
       await remove(args[0], args[1]);
-      console.log(chalk.green('File deleted successfully.'));
       break;
     case 'rn':
       await renameFn(args[0], args[1]);
@@ -43,16 +42,6 @@ export default async function executedCommands(command, args) {
       break;
     case 'hash':
       await calcHash(args[0]);
-      break;
-    // need to implement this
-    case 'system':
-      await operatingSystem(args[0], args[1]);
-      console.log(chalk.green('Operation system has been displayed'));
-      break;
-    // need to implement this
-    case 'streams':
-      await streams(args[0], args[1]);
-      console.log(chalk.green('Streams successfully.'));
       break;
     default:
       console.log(chalk.red('Invalid input'));

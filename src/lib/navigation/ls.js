@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import chalk from 'chalk';
 
 export default async function listFilesAndFolders() {
   try {
@@ -26,8 +27,7 @@ export default async function listFilesAndFolders() {
 
     console.table(filesAndFolders);
   } catch (err) {
+    console.log(chalk.red('Operation failed'));
     console.error('Error:', err);
   }
 }
-
-// listFilesAndFolders();
