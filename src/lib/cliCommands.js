@@ -9,6 +9,7 @@ import changeDirectory from './navigation/cd.js';
 import up from './navigation/up.js';
 import listFilesAndFolders from './navigation/ls.js';
 import readFile from './fs/read.js';
+import getEOLCharacter from './os/eol.js';
 
 export default async function executedCommands(command, args) {
   switch (command) {
@@ -36,6 +37,9 @@ export default async function executedCommands(command, args) {
       break;
     case 'rn':
       await renameFn(args[0], args[1]);
+      break;
+    case 'os':
+      getEOLCharacter(args[0]);
       break;
     case 'hash':
       await calcHash(args[0]);
