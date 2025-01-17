@@ -40,7 +40,6 @@ rl.on('line', async (line) => {
   const [command, ...args] = line.trim().split(' ');
 
   if (command === '.exit') {
-    console.log(chalk.green(`Thank you for using File Manager, ${username}, goodbye!`));
     rl.close();
     return;
   }
