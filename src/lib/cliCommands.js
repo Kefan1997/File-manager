@@ -1,7 +1,6 @@
 import chalk from 'chalk';
 
 import copy from './fs/copy.js';
-import remove from './fs/delete.js';
 import renameFn from './fs/rename.js';
 import calcHash from './hash/calcHash.js';
 import createFile from './fs/createFile.js';
@@ -30,9 +29,6 @@ export default async function executedCommands(command, args) {
       break;
     case 'cp':
       await copy(args[0], args[1]);
-      break;
-    case 'delete':
-      await remove(args[0], args[1]);
       break;
     case 'rn':
       await renameFn(args[0], args[1]);
