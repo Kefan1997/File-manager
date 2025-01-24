@@ -6,6 +6,9 @@
   "author": "Oleg Rashchinksy <oleg.rashchinksy@sharpgaming.com>",
   "license": "MIT",
   "type": "module",
+  "bin": {
+    "file-manager": "./bin/index.js"
+  },
   "scripts": {
     "start": "node ./bin/index.js"
   },
