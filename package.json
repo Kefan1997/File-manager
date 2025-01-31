@@ -10,7 +10,7 @@
     "file-manager": "./src/index.js"
   },
   "scripts": {
-    "start": "node ./bin/index.js"
+    "start": "node ./src/index.js"
   },
   "dependencies": {
     "chalk": "^5.4.1",
