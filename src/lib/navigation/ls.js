@@ -10,11 +10,7 @@ export default async function listFilesAndFolders() {
     const fullPath = path.join('.', file);
     const stats = await fs.stat(fullPath);
 
-    if (stats.isDirectory()) {
-      filesAndFolders.push({ name: file, type: 'directory' });
-    } else if (stats.isFile()) {
-      filesAndFolders.push({ name: file, type: 'file' });
-    }
+    filesAndFolders.push({ name: file, type: stats.isDirectory() ? 'directory' : 'file' });
   }
 
   filesAndFolders.sort((a, b) => {
