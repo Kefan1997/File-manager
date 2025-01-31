@@ -3,7 +3,6 @@ import fs from 'node:fs';
 import chalk from 'chalk';
 
 export default async function copy(pathToFile, pathToNewDirectory) {
-  try {
     const resolvedPathToFile = path.resolve(pathToFile);
     const resolvedPathToNewDir = path.resolve(pathToNewDirectory);
 
@@ -34,7 +33,4 @@ export default async function copy(pathToFile, pathToNewDirectory) {
     writable.on('error', (err) => {
       console.error(chalk.red('Error writing file:'), err.message);
     });
-  } catch (err) {
-    throw err;
-  }
 }
